@@ -1,5 +1,5 @@
 {
-  "name": "lodown-JCorley44",
+  "name": "lodown-jcorley44",
   "version": "1.0.0",
   "description": "my lodown package and stuff and things for bootcamp",
   "main": "index.js",
@@ -25,5 +25,6 @@
     "istanbul": "^0.4.5",
     "mocha": "^7.0.1",
     "sinon": "^9.0.0"
-  }
+  },
+  "dependencies": {}
 }
