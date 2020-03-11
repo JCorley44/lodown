@@ -58,7 +58,7 @@ module.exports.identity = identity;
  * 
  * @param {Any Datatype} value: The input can be any value 
  * 
- * @return {Any Datatype}: The function will return the datatype of the input as a string
+ * @return {String}: The function will return the datatype of the input as a string
  */
  
 function typeOf (value){
@@ -149,7 +149,7 @@ if(!Array.isArray(array)){
      return outputArray = array.slice(-number, array.length);
     }
 };
-
+module.exports.last = last;
 
 
 
@@ -158,11 +158,12 @@ if(!Array.isArray(array)){
 
 
 /**
- * indexOf function: This function will search for the first instance of the given input value
+ * indexOf function: This function will search for the first instance of the given input value. If the value isn't 
+ * in the array the return will be negative one. 
  * 
  * @param {Array & Value} collection and simple data: the input value will 
  * 
- * @return {Number} simple data: The return will be the first instance of the input value
+ * @return {Number} simple data: The return will be the first instance of the input value.
  */
  
  function indexOf (array, value){
@@ -176,7 +177,7 @@ if(!Array.isArray(array)){
     
         return -1;
 }
- 
+module.exports.indexOf = indexOf;
  
  
  
@@ -195,7 +196,7 @@ if(!Array.isArray(array)){
     
 return (array.includes(value)) ? true : false;
 }
-
+module.exports.contains = contains;
  
  
  
@@ -222,8 +223,7 @@ return (array.includes(value)) ? true : false;
         }
     }
 };
- 
- 
+module.exports.each = each;
  
  
  
@@ -234,7 +234,7 @@ return (array.includes(value)) ? true : false;
  * 
  * @param {Array} collection: An array  
  * 
- * @return {Array} collection: This array will have all of the unique values from the 
+ * @return {Array} collection: Will return a new array with only unique values 
  */
  
 function unique (array){
@@ -250,7 +250,7 @@ function unique (array){
     
     return resultArray;
 };
- 
+module.exports.unique = unique;
  
  
  
@@ -258,7 +258,8 @@ function unique (array){
  
  
  /**
- * filter function: Iterates over an array with a function and will return a new array.
+ * filter function: Iterates over an array with a function and will return a new array. The new array will have only values that have a value
+ * of true when testing againt thr input function.
  * 
  * @param {Array & Function} collection and complex data: a function will iterate over the array and determine if the elements are true or
  * false.
@@ -275,8 +276,7 @@ function filter (array, action){
     });
     return arr;
 };
-
- 
+module.exports.filter = filter;
  
  
  
@@ -284,12 +284,13 @@ function filter (array, action){
  
  
  /**
- * reject function: Iterates over an array with a function and will return a new array.
+ * reject function: Iterates over an array with a function and will return a new array of falsy values. The value of false will be assigned when 
+ * tested against the input function. 
  * 
  * @param {Array & Function} collection and complex data: a function will iterate over the array and determine if the elements are true or
  * false.
  * 
- * @return {Array} collection: the array returned will be all of the values which have been evaluated as false
+ * @return {Array} collection: the array returned will be all of the values which have been evaluated as false.
  */
  
  function reject (array, test){
@@ -301,7 +302,7 @@ function filter (array, action){
     });
     return arr;
 };
-
+module.exports.reject = reject;
  
  
  
@@ -310,9 +311,10 @@ function filter (array, action){
  
  
  /**
- * partition function: Seperates the values in the array into two sub arrrays one of the truthy values and the other of falsy values
+ * partition function: Seperates the values in the array into two sub arrrays one of the truthy values and the other of falsy values. The values 
+ * are evaluated by the input function.
  * 
- * @param {Array & Function} collection and complex data: 
+ * @param {Array & Function} collection and complex data: A collection for the partition to iterate over using a function.
  * 
  * @return {Array} collection: One array with two sub arrays inside of it, one with all of the truthy values and the other with all of the falsy values 
  */
@@ -322,7 +324,7 @@ function partition (array, test){
     arr.push(filter(array,test),reject(array,test));
     return arr;
 };
-
+module.exports.partition = partition;
  
 
 
@@ -333,7 +335,7 @@ function partition (array, test){
 /**
  * map function: Iterates over an array applying a callback function to each element.
  * 
- * @param {Object or Array & Function} collection and complex data: The inputs will have their values changed by the inout function
+ * @param {Object or Array & Function} collection and complex data: The inputs will have their values changed by the input function
  * 
  * @return {Array} collection: The return is an array with element having the value of callback function
  * and the previous elements value 
@@ -347,7 +349,7 @@ function map (collection, test){
     });
     return arr;
 };
- 
+module.exports.map = map;
  
  
  
@@ -355,22 +357,25 @@ function map (collection, test){
  
  
  /**
- * pluck function: Iterates over an array of objects and stores the values in an array 
+ * pluck function: Iterates over an array of objects and stores the values in an array. 
  *  
- * @param {Array & Object} collection: 
+ * @param {Array} collection: The array has an object in each element.
  * 
- * @return {Array} collection: The return will be an array of the objects values.
+ * @return {Array} collection: The return will be an array of the objects values of a certain proerty name.
  */
- 
-function pluck (arr, type) {
-    var arrPlucked = [];
-    arr.forEach(function(element) {
-        arrPlucked.push(element[type]);
-    });
-    return arrPlucked;
-};
 
- 
+function pluck (array, property) {
+  let arr = [];
+  map(array,(value, key , collection) =>{
+    for(let keys in value){
+      if(keys === property){
+        arr.push(value[keys]);
+      }
+    }
+  });
+  return arr;
+}
+module.exports.pluck = pluck;
  
  
  
@@ -380,7 +385,7 @@ function pluck (arr, type) {
  /**
  * every function: Evaluates a given collection for true or false when a function is passed over each element.
  * 
- * @param {Collection & Function} collection and complex data: 
+ * @param {Collection & Function} collection and complex data: A function will iterate over a collection to test the truthyness of it.  
  * 
  * @return {Boolean} logical: It will return true only if all elements in the arrayare evaluated as true. 
  * If one element returns as false then all are false.
@@ -403,7 +408,7 @@ function every (collection, action){
     });
     return !contains(resultsArray, false);
 };
- 
+module.exports.every = every; 
  
  
  
@@ -411,12 +416,12 @@ function every (collection, action){
  
  
  /**
- * some function: this functoin looks at an array element and tests it to see if it passes or fails.
+ * some function: this function looks at an array element and tests it to see if it passes or fails.
  * 
  * @param {Collection & Function} collection and function: the function will execute over 
  * 
- * @return {Boolean} logic: After the elements are tested against the function the return value will either be truth or false
- * depending if the individual element passes the test.
+ * @return {Boolean} logic: If one element in the array returns true then the final resulting output for the function will be true.
+ * It will only return false if every object in the array is false. 
  */
  
 function some (collection, action){
@@ -436,8 +441,7 @@ function some (collection, action){
     });
     return contains(resultsArray, true);
 };
- 
- 
+module.exports.some = some; 
  
  
  
@@ -445,25 +449,32 @@ function some (collection, action){
  
  /**
  * reduce function: It will call a function for every element in a given collection with arguments: previous result, element, index.
- * If the seed is not given the value of the first element will be used as the seed.
+ * If the seed is not given the value of the first element will be used as the seed. The reduce function will iterate over the collection 
+ * and return a single value that was generated. This value is the seed or accumulator.
  * 
  * @param {Array, Action & Seed} collection, complex data, and data: An array will have a given function iterate over each element inorder to reduce
  * the array to a single value.
  * 
- * @return {Data} data: The return will be the amalgamation of all elements after the functions has iterated over them.
+ * @return {Data} data: The return will be the any datatype the user needs.
  */
- 
- function reduce (array, action, seed){
-      each(array, function(elem, ind, arr){
-        if(seed === undefined){
-            seed = array[0];
-        } else if(seed){
-            seed = action(seed, elem, ind);
+
+function reduce(array, func, seed){
+     let previousResult;
+    if(seed !== undefined){
+         previousResult = seed;
+        each(array, function (e,i,a){
+            previousResult = func(previousResult, e, i,a);
+        });
+    }else {
+         previousResult = array[0];
+        for (let i = 1; i < array.length; i++){
+          previousResult = func(previousResult, array[i], i, array);
         }
-    });
-    return seed;
-};
- 
+    }
+return previousResult;
+}
+
+module.exports.reduce = reduce; 
  
  
  
@@ -471,7 +482,7 @@ function some (collection, action){
  
  
  /**
- * extend function: To copy object properties from one object to another.  
+ * extend function: Copy object properties from one object to another.  
  * 
  * @param {Multiple Objects} collections: It will take in multiple objects 
  * 
@@ -484,7 +495,7 @@ function some (collection, action){
     });
     return object;
 };
- 
+module.exports.extend = extend;
  
  
  
