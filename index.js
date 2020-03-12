@@ -86,7 +86,7 @@ module.exports.typeOf = typeOf;
  * number parameter is greater than the array length the function will return the array parameter in its entirety. Lastly
  * if the number parameter is undefined only the first element of the array will be returned.
  * 
- * @param {Array} collection and simple data: the number input will determine how many elements will be returned.
+ * @param {Array} array: the number input will determine how many elements will be returned.
  *  
  * @param {Number} number: determines the number of elements to return from the beginning of the array
  * 
@@ -126,7 +126,7 @@ module.exports.first = first;
  * number parameter is greater than the array length the function will return the array parameter in its entirety. Lastly
  * if the number parameter is undefined only the first element of the array will be returned
  * 
- * @param {Array} collection and simple data: the number input will determine how many elements will be returned.
+ * @param {Array} array: the number input will determine how many elements will be returned.
  * 
  * @param {Number} number: determines the number of elements to return from the end of the array
  * 
@@ -163,7 +163,7 @@ module.exports.last = last;
  * indexOf function: This function will search for the first instance of the given input value. If the value isn't 
  * in the array the return will be negative one. 
  * 
- * @param {Array} collection and simple data: the input value will 
+ * @param {Array} array: the input value will 
  * 
  * @param {Value} value: The value to look for in the array
  * 
@@ -355,7 +355,7 @@ module.exports.map = map;
  * 
  * @param {String} property: This is the property that will be checked
  * 
- * @return {Array} property: The return will be an array of the objects values of a certain proerty name.
+ * @return {Array} array: The return will be an array of the objects values of a certain proerty name.
  */
 
 function pluck (array, property) {
@@ -378,7 +378,7 @@ module.exports.pluck = pluck;
  
  /**
  * every function: Evaluates a given collection for true or false when a function is passed over each element.
- * if a function is not provided, some will return true if any element is truthy if none are truthy it will return false
+ * if a function is not provided, every will return true if all elements are true and false if one is false.
  *
  * 
  * @param {Collection} collection: A collection for the function to iterate over  
@@ -415,7 +415,7 @@ module.exports.every = every;
  
  /**
  * some function: this function looks at an array element and tests it to see if it passes or fails. 
- * if a function is not provided, some will return true if any element is truthy if none are truthy it will return false
+ * if a function is not provided, some will return true if any element is true and return false if all are false
  * 
  * @param {Collection} collection: the function will execute over 
  * 
@@ -455,7 +455,7 @@ module.exports.some = some;
  * 
  * @param {Array} array: an array for the function to iterate over
  * 
- * @param {Function} action: the functino will be applied to each value in the array
+ * @param {Function} func: the functino will be applied to each value in the array
  * 
  * @param {Any Datatype} seed: This is the starting value of the reduce function
  * 
