@@ -218,7 +218,7 @@ module.exports.contains = contains;
  /**
  * unique function: This function will return an array with only unique values 
  * 
- * @param {Array} collection: An array the function will iterate over 
+ * @param {Array} array: An array the function will iterate over 
  * 
  * @return {Array} collection: Will return a new array with only unique values 
  */
