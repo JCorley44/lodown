@@ -80,6 +80,7 @@ module.exports.typeOf = typeOf;
 
 
 
+
 /**
  * first function: the inputs for this function are an array and number. The number will determine how many elements of the 
  * array will be output. Edge cases of the number being negative and the array parameter not being an array will return an empty array. If the 
